@@ -191,7 +191,7 @@
     <div class="legend-item"><div class="legend-dot legend-e"></div>出局</div>
   </div>
   <div class="wc-footer">
-    <span id="footerNote">數據由編輯人工更新</span>
+    <span id="footerNote">更新時間：尚未開賽</span>
     <button class="btn-edit" onclick="showEdit()">編輯數據</button>
   </div>
 </div>
@@ -303,7 +303,9 @@ function renderGroup(groupKey) {
     const mp  = t[2] + t[3] + t[4];
     const gd  = t[5] - t[6];
     const gdStr = mp > 0 ? (gd > 0 ? `+${gd}` : `${gd}`) : "—";
-    const sc = rank <= 2 ? "status-q" : rank === 3 ? "status-t" : "status-e";
+    const hasPlayed = teams.some(t => t[2]+t[3]+t[4] > 0);
+    const allSame = teams.every(t => (t[2]*3+t[4]) === (teams[0][2]*3+teams[0][4]));
+    const sc = (!hasPlayed || allSame) ? "status-e" : rank <= 2 ? "status-q" : rank === 3 ? "status-t" : "status-e";
     const ptsCls = pts >= 6 ? "pts-high" : pts >= 3 ? "pts-mid" : "";
     return `<tr>
       <td class="col-rank">${rank}</td>
