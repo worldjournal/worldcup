@@ -10,104 +10,31 @@
   :root {
     --red: #C8102E; --dark: #1a1a2e; --mid: #2d2d44; --gold: #D4AF37;
     --light: #f5f5f0; --border: #e0ddd5; --text: #1a1a1a; --muted: #888;
-    --qualify: #1a6b3c; --qualify-bg: #e8f5ee;
-    --third: #1a4f8c; --third-bg: #e8eef8;
+    --qualify: #1a6b3c; --third: #1a4f8c;
   }
   body { font-family: 'Noto Sans TC', sans-serif; background: #f8f7f3; color: var(--text); padding: 16px; }
 
-  /* ══ 編輯區（只有編輯時看得到）══ */
-  .edit-panel {
-    max-width: 720px;
-    background: #fffbe8;
-    border: 2px dashed #f0c040;
-    border-radius: 6px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-  }
-  .edit-panel h2 {
-    font-size: 13px; font-weight: 700; color: #7a5f00;
-    margin-bottom: 12px; letter-spacing: .04em;
-  }
-  .edit-panel .hint {
-    font-size: 11px; color: #a07800; margin-bottom: 14px; line-height: 1.6;
-  }
-  .edit-groups { display: flex; flex-direction: column; gap: 14px; }
-  .edit-group-block { background: #fff; border: 1px solid #e8d88a; border-radius: 4px; overflow: hidden; }
-  .edit-group-title {
-    background: #f5e68a; padding: 6px 12px;
-    font-size: 12px; font-weight: 700; color: #5a4400;
-    letter-spacing: .06em;
-  }
-  .edit-rows { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; }
-  .edit-row {
-    display: grid;
-    grid-template-columns: 80px 36px 36px 36px 36px 36px;
-    gap: 4px;
-    align-items: center;
-  }
-  .edit-row .team-label { font-size: 12px; font-weight: 500; }
-  .edit-row input {
-    width: 100%; border: 1px solid #ddd; border-radius: 3px;
-    padding: 3px 4px; font-size: 12px; text-align: center;
-    font-family: inherit;
-  }
-  .edit-row input:focus { outline: none; border-color: var(--gold); background: #fffbe8; }
-  .edit-col-headers {
-    display: grid;
-    grid-template-columns: 80px 36px 36px 36px 36px 36px;
-    gap: 4px; padding: 4px 12px 0;
-  }
-  .edit-col-headers span {
-    font-size: 9px; color: var(--muted); text-align: center; letter-spacing: .06em; font-weight: 700;
-  }
-  .edit-col-headers span:first-child { text-align: left; }
-  .edit-actions { display: flex; gap: 8px; margin-top: 14px; }
-  .btn-hide {
-    padding: 7px 16px; font-size: 12px; font-weight: 700;
-    background: var(--dark); color: #fff; border: none;
-    border-radius: 3px; cursor: pointer; font-family: inherit;
-    letter-spacing: .04em;
-  }
-  .btn-hide:hover { background: #2d2d44; }
-
-  /* ══ 戰績表 ══ */
-  .wc-widget {
-    max-width: 720px; background: #fff;
-    border: 1px solid var(--border); border-radius: 4px;
-    overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07);
-  }
-  .wc-header {
-    background: var(--dark); color: #fff;
-    padding: 14px 18px 12px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
+  .wc-widget { max-width: 720px; background: #fff; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .wc-header { background: var(--dark); color: #fff; padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; }
   .wc-header-left { display: flex; align-items: center; gap: 10px; }
   .wc-trophy { font-size: 22px; filter: drop-shadow(0 0 6px rgba(212,175,55,.6)); }
   .wc-title { font-family: 'Noto Serif TC', serif; font-size: 15px; font-weight: 700; letter-spacing: .04em; }
   .wc-subtitle { font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .06em; margin-top: 2px; }
   .wc-updated { font-size: 10px; color: rgba(255,255,255,.45); text-align: right; }
 
-  .wc-tabs {
-    display: flex; overflow-x: auto; scrollbar-width: none;
-    background: var(--mid); border-bottom: 2px solid var(--red);
-  }
+  .wc-tabs { display: flex; overflow-x: auto; scrollbar-width: none; background: var(--mid); border-bottom: 2px solid var(--red); }
   .wc-tabs::-webkit-scrollbar { display: none; }
-  .wc-tab {
-    flex: 0 0 auto; padding: 8px 14px; font-size: 12px; font-weight: 700;
-    color: rgba(255,255,255,.55); cursor: pointer; letter-spacing: .06em;
-    border: none; background: none; transition: color .2s; white-space: nowrap;
-    font-family: inherit;
-  }
+  .wc-tab { flex: 0 0 auto; padding: 8px 14px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,.55); cursor: pointer; letter-spacing: .06em; border: none; background: none; transition: color .2s; white-space: nowrap; font-family: inherit; }
   .wc-tab:hover { color: #fff; }
   .wc-tab.active { color: var(--gold); border-bottom: 2px solid var(--gold); margin-bottom: -2px; }
 
+  .wc-state { padding: 32px 16px; text-align: center; color: var(--muted); font-size: 13px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .wc-spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--red); border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
   .wc-table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead th {
-    background: var(--light); font-size: 10px; font-weight: 700;
-    color: var(--muted); letter-spacing: .08em; text-align: center;
-    padding: 7px 6px; border-bottom: 1px solid var(--border); white-space: nowrap;
-  }
+  thead th { background: var(--light); font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .08em; text-align: center; padding: 7px 6px; border-bottom: 1px solid var(--border); white-space: nowrap; }
   thead th.col-team { text-align: left; padding-left: 12px; }
   tbody tr { border-bottom: 1px solid #f0ede8; transition: background .15s; }
   tbody tr:last-child { border-bottom: none; }
@@ -121,57 +48,24 @@
   td.col-pts { font-weight: 700; font-size: 14px; }
   td.col-gd { font-size: 12px; color: var(--muted); }
   .pts-high { color: var(--qualify); }
-  .pts-mid  { color: var(--third); }
+  .pts-mid { color: var(--third); }
   .status-bar { width: 4px; height: 32px; border-radius: 2px; flex-shrink: 0; }
   .status-q { background: var(--qualify); }
   .status-t { background: var(--third); }
   .status-e { background: #ddd; }
 
-  .wc-legend {
-    display: flex; gap: 16px; padding: 10px 14px;
-    background: var(--light); border-top: 1px solid var(--border); flex-wrap: wrap;
-  }
+  .wc-legend { display: flex; gap: 16px; padding: 10px 14px; background: var(--light); border-top: 1px solid var(--border); flex-wrap: wrap; }
   .legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--muted); }
   .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
   .legend-q { background: var(--qualify); }
   .legend-t { background: var(--third); }
   .legend-e { background: #ddd; }
 
-  .wc-footer {
-    padding: 8px 14px; background: #f8f7f3;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-  }
+  .wc-footer { padding: 8px 14px; background: #f8f7f3; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .wc-footer span { font-size: 10px; color: var(--muted); }
-  .btn-edit {
-    padding: 4px 12px; font-size: 11px; font-weight: 700;
-    background: #fff; color: var(--dark);
-    border: 1px solid var(--border); border-radius: 3px;
-    cursor: pointer; font-family: inherit;
-  }
-  .btn-edit:hover { border-color: var(--dark); }
 </style>
 </head>
 <body>
-
-<!-- ══════════════════════════════════════════
-     ★ 編輯區（編輯完後按「隱藏編輯區」）
-     ══════════════════════════════════════════ -->
-<div class="edit-panel" id="editPanel" style="display:none">
-  <h2>✏️ 編輯戰績數據</h2>
-  <p class="hint">
-    每場比賽結束後，在下方填入最新數據，然後按「隱藏編輯區」。<br>
-    欄位說明：<strong>勝 / 負 / 平 / 進球 / 失球</strong>
-  </p>
-  <div class="edit-groups" id="editGroups"></div>
-  <div class="edit-actions">
-    <button class="btn-hide" onclick="hideEdit()">✓ 完成，隱藏編輯區</button>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     戰績表（讀者看到的）
-     ══════════════════════════════════════════ -->
 <div class="wc-widget">
   <div class="wc-header">
     <div class="wc-header-left">
@@ -181,109 +75,54 @@
         <div class="wc-subtitle">FIFA World Cup · USA / CAN / MEX</div>
       </div>
     </div>
-    <div class="wc-updated" id="lastUpdated">—</div>
+    <div class="wc-updated" id="lastUpdated">載入中…</div>
   </div>
   <div class="wc-tabs" id="tabsContainer"></div>
-  <div id="contentArea"></div>
+  <div id="contentArea"><div class="wc-state"><div class="wc-spinner"></div><span>資料載入中…</span></div></div>
   <div class="wc-legend">
     <div class="legend-item"><div class="legend-dot legend-q"></div>直接晉級淘汰賽</div>
     <div class="legend-item"><div class="legend-dot legend-t"></div>最佳第三名（待定）</div>
     <div class="legend-item"><div class="legend-dot legend-e"></div>出局</div>
   </div>
   <div class="wc-footer">
-    <span id="footerNote">更新時間：尚未開賽</span>
-    <button class="btn-edit" id="editBtn" onclick="showEdit()" style="display:none">編輯數據</button>
+    <span id="footerNote">數據來源：編輯團隊</span>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-//  ★★★ 戰績數據區 ★★★
-//  每場比賽後更新這裡，格式：
-//  [隊名, 旗幟, 勝, 負, 平, 進球, 失球]
-// ══════════════════════════════════════════════════════
-const GROUPS = {
-  "A": [
-    ["捷克",     "🇨🇿", 0, 0, 0, 0, 0],
-    ["南韓",     "🇰🇷", 0, 0, 0, 0, 0],
-    ["墨西哥",   "🇲🇽", 0, 0, 0, 0, 0],
-    ["南非",     "🇿🇦", 0, 0, 0, 0, 0],
-  ],
-  "B": [
-    ["波赫",     "🇧🇦", 0, 0, 0, 0, 0],
-    ["加拿大",   "🇨🇦", 0, 0, 0, 0, 0],
-    ["卡達",     "🇶🇦", 0, 0, 0, 0, 0],
-    ["瑞士",     "🇨🇭", 0, 0, 0, 0, 0],
-  ],
-  "C": [
-    ["巴西",     "🇧🇷", 0, 0, 0, 0, 0],
-    ["海地",     "🇭🇹", 0, 0, 0, 0, 0],
-    ["摩洛哥",   "🇲🇦", 0, 0, 0, 0, 0],
-    ["蘇格蘭",   "🏴󠁧󠁢󠁳󠁣󠁴󠁿", 0, 0, 0, 0, 0],
-  ],
-  "D": [
-    ["澳洲",     "🇦🇺", 0, 0, 0, 0, 0],
-    ["巴拉圭",   "🇵🇾", 0, 0, 0, 0, 0],
-    ["土耳其",   "🇹🇷", 0, 0, 0, 0, 0],
-    ["美國",     "🇺🇸", 0, 0, 0, 0, 0],
-  ],
-  "E": [
-    ["古拉索",   "🇨🇼", 0, 0, 0, 0, 0],
-    ["厄瓜多",   "🇪🇨", 0, 0, 0, 0, 0],
-    ["德國",     "🇩🇪", 0, 0, 0, 0, 0],
-    ["象牙海岸", "🇨🇮", 0, 0, 0, 0, 0],
-  ],
-  "F": [
-    ["日本",     "🇯🇵", 0, 0, 0, 0, 0],
-    ["荷蘭",     "🇳🇱", 0, 0, 0, 0, 0],
-    ["瑞典",     "🇸🇪", 0, 0, 0, 0, 0],
-    ["突尼西亞", "🇹🇳", 0, 0, 0, 0, 0],
-  ],
-  "G": [
-    ["比利時",   "🇧🇪", 0, 0, 0, 0, 0],
-    ["埃及",     "🇪🇬", 0, 0, 0, 0, 0],
-    ["伊朗",     "🇮🇷", 0, 0, 0, 0, 0],
-    ["紐西蘭",   "🇳🇿", 0, 0, 0, 0, 0],
-  ],
-  "H": [
-    ["維德角",       "🇨🇻", 0, 0, 0, 0, 0],
-    ["沙烏地阿拉伯", "🇸🇦", 0, 0, 0, 0, 0],
-    ["西班牙",       "🇪🇸", 0, 0, 0, 0, 0],
-    ["烏拉圭",       "🇺🇾", 0, 0, 0, 0, 0],
-  ],
-  "I": [
-    ["法國",     "🇫🇷", 0, 0, 0, 0, 0],
-    ["伊拉克",   "🇮🇶", 0, 0, 0, 0, 0],
-    ["挪威",     "🇳🇴", 0, 0, 0, 0, 0],
-    ["塞內加爾", "🇸🇳", 0, 0, 0, 0, 0],
-  ],
-  "J": [
-    ["阿爾及利亞", "🇩🇿", 0, 0, 0, 0, 0],
-    ["阿根廷",     "🇦🇷", 0, 0, 0, 0, 0],
-    ["奧地利",     "🇦🇹", 0, 0, 0, 0, 0],
-    ["約旦",       "🇯🇴", 0, 0, 0, 0, 0],
-  ],
-  "K": [
-    ["哥倫比亞", "🇨🇴", 0, 0, 0, 0, 0],
-    ["民主剛果", "🇨🇩", 0, 0, 0, 0, 0],
-    ["葡萄牙",   "🇵🇹", 0, 0, 0, 0, 0],
-    ["烏茲別克", "🇺🇿", 0, 0, 0, 0, 0],
-  ],
-  "L": [
-    ["克羅埃西亞", "🇭🇷", 0, 0, 0, 0, 0],
-    ["英格蘭",     "🏴󠁧󠁢󠁥󠁮󠁧󠁿", 0, 0, 0, 0, 0],
-    ["迦納",       "🇬🇭", 0, 0, 0, 0, 0],
-    ["巴拿馬",     "🇵🇦", 0, 0, 0, 0, 0],
-  ],
-};
+// ══ 設定：你的 Google 試算表 ID ══
+const SHEET_ID = "1QxDvl4jOq_vZIAP8OWvetnL7lBgNVeXUZLSwhP6v228";
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 
-// 最後更新時間（每次編輯後自動記錄）
-let lastUpdated = "";
+let GROUPS = {};
+let activeGroup = "A";
+
+// ══ 抓取試算表數據 ══
+async function fetchData() {
+  const res = await fetch(SHEET_URL);
+  const text = await res.text();
+  const rows = text.trim().split("\n").slice(1); // 跳過標題行
+
+  GROUPS = {};
+  for (const row of rows) {
+    // 處理 CSV，支援逗號在引號內
+    const cols = row.match(/(".*?"|[^,]+)(?=,|$)/g) || [];
+    const clean = cols.map(c => c.replace(/^"|"$/g, "").trim());
+    const [grp, name, flag, w, l, d, gf, ga] = clean;
+    if (!grp || grp === "組別") continue;
+    if (!GROUPS[grp]) GROUPS[grp] = [];
+    GROUPS[grp].push([
+      name, flag,
+      parseInt(w)||0, parseInt(l)||0, parseInt(d)||0,
+      parseInt(gf)||0, parseInt(ga)||0
+    ]);
+  }
+}
 
 // ══ 排序 ══
 function sortTeams(teams) {
   return [...teams].sort((a, b) => {
-    const ptsA = a[2]*3 + a[4], ptsB = b[2]*3 + b[4];
+    const ptsA = a[2]*3+a[4], ptsB = b[2]*3+b[4];
     if (ptsB !== ptsA) return ptsB - ptsA;
     const gdA = a[5]-a[6], gdB = b[5]-b[6];
     if (gdB !== gdA) return gdB - gdA;
@@ -291,64 +130,47 @@ function sortTeams(teams) {
   });
 }
 
-// ══ 渲染戰績表 ══
-let activeGroup = "A";
-
+// ══ 渲染 ══
 function renderGroup(groupKey) {
-  const raw = GROUPS[groupKey];
-  const teams = sortTeams(raw);
+  const teams = sortTeams(GROUPS[groupKey] || []);
+  const hasPlayed = teams.some(t => t[2]+t[3]+t[4] > 0);
+  const allSame = teams.every(t => (t[2]*3+t[4]) === (teams[0]?.[2]*3+teams[0]?.[4]));
+
   const rows = teams.map((t, i) => {
-    const rank = i + 1;
-    const pts = t[2]*3 + t[4];
-    const mp  = t[2] + t[3] + t[4];
-    const gd  = t[5] - t[6];
+    const rank = i+1;
+    const pts = t[2]*3+t[4];
+    const mp = t[2]+t[3]+t[4];
+    const gd = t[5]-t[6];
     const gdStr = mp > 0 ? (gd > 0 ? `+${gd}` : `${gd}`) : "—";
-    const hasPlayed = teams.some(t => t[2]+t[3]+t[4] > 0);
-    const allSame = teams.every(t => (t[2]*3+t[4]) === (teams[0][2]*3+teams[0][4]));
     const sc = (!hasPlayed || allSame) ? "status-e" : rank <= 2 ? "status-q" : rank === 3 ? "status-t" : "status-e";
     const ptsCls = pts >= 6 ? "pts-high" : pts >= 3 ? "pts-mid" : "";
     return `<tr>
       <td class="col-rank">${rank}</td>
-      <td class="col-team">
-        <div class="team-cell">
-          <div class="status-bar ${sc}"></div>
-          <span class="team-flag">${t[1]}</span>
-          <span class="team-name">${t[0]}</span>
-        </div>
-      </td>
-      <td>${mp}</td>
-      <td>${t[2]}</td>
-      <td>${t[4]}</td>
-      <td>${t[3]}</td>
-      <td>${t[5]}</td>
-      <td>${t[6]}</td>
+      <td class="col-team"><div class="team-cell">
+        <div class="status-bar ${sc}"></div>
+        <span class="team-flag">${t[1]}</span>
+        <span class="team-name">${t[0]}</span>
+      </div></td>
+      <td>${mp}</td><td>${t[2]}</td><td>${t[4]}</td><td>${t[3]}</td>
+      <td>${t[5]}</td><td>${t[6]}</td>
       <td class="col-gd">${gdStr}</td>
       <td class="col-pts ${ptsCls}">${pts}</td>
     </tr>`;
   }).join("");
 
   document.getElementById("contentArea").innerHTML = `
-    <div class="wc-table-wrap">
-      <table>
-        <thead><tr>
-          <th class="col-rank">#</th>
-          <th class="col-team">球隊</th>
-          <th title="出賽">賽</th>
-          <th title="勝">勝</th>
-          <th title="平">平</th>
-          <th title="負">負</th>
-          <th title="進球">進</th>
-          <th title="失球">失</th>
-          <th title="淨勝球">淨</th>
-          <th title="積分">分</th>
-        </tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>`;
+    <div class="wc-table-wrap"><table>
+      <thead><tr>
+        <th class="col-rank">#</th><th class="col-team">球隊</th>
+        <th>賽</th><th>勝</th><th>平</th><th>負</th>
+        <th>進</th><th>失</th><th>淨</th><th>分</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
 }
 
 function buildTabs() {
-  const keys = Object.keys(GROUPS);
+  const keys = Object.keys(GROUPS).sort();
   document.getElementById("tabsContainer").innerHTML = keys.map(k =>
     `<button class="wc-tab ${k===activeGroup?"active":""}" onclick="switchGroup('${k}')">${k} 組</button>`
   ).join("");
@@ -362,56 +184,23 @@ function switchGroup(g) {
   renderGroup(g);
 }
 
-// ══ 編輯區 ══
-function buildEditPanel() {
-  const html = Object.entries(GROUPS).map(([key, teams]) => `
-    <div class="edit-group-block">
-      <div class="edit-group-title">${key} 組</div>
-      <div class="edit-col-headers">
-        <span>球隊</span><span>勝</span><span>負</span><span>平</span><span>進球</span><span>失球</span>
-      </div>
-      <div class="edit-rows">
-        ${teams.map((t, i) => `
-          <div class="edit-row">
-            <span class="team-label">${t[1]} ${t[0]}</span>
-            <input type="number" min="0" value="${t[2]}" onchange="updateData('${key}',${i},2,this.value)" />
-            <input type="number" min="0" value="${t[3]}" onchange="updateData('${key}',${i},3,this.value)" />
-            <input type="number" min="0" value="${t[4]}" onchange="updateData('${key}',${i},4,this.value)" />
-            <input type="number" min="0" value="${t[5]}" onchange="updateData('${key}',${i},5,this.value)" />
-            <input type="number" min="0" value="${t[6]}" onchange="updateData('${key}',${i},6,this.value)" />
-          </div>`).join("")}
-      </div>
-    </div>`).join("");
-  document.getElementById("editGroups").innerHTML = html;
-}
-
-function updateData(group, teamIdx, field, val) {
-  GROUPS[group][teamIdx][field] = parseInt(val) || 0;
-  renderGroup(activeGroup);
-}
-
-function showEdit() {
-  buildEditPanel();
-  document.getElementById("editPanel").style.display = "block";
-  document.getElementById("editPanel").scrollIntoView({ behavior: "smooth" });
-}
-
-function hideEdit() {
-  document.getElementById("editPanel").style.display = "none";
-  const now = new Date();
-  lastUpdated = `${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")} 更新`;
-  document.getElementById("lastUpdated").textContent = lastUpdated;
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
 // ══ 初始化 ══
-buildTabs();
-renderGroup(activeGroup);
-
-// 密碼保護：網址含 ?edit=wj2026 才顯示編輯按鈕
-if (new URLSearchParams(window.location.search).get('edit') === 'wj2026') {
-  document.getElementById('editBtn').style.display = 'block';
+async function init() {
+  try {
+    await fetchData();
+    const now = new Date();
+    document.getElementById("lastUpdated").textContent =
+      `${now.getMonth()+1}月${now.getDate()}日 ${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")} 更新`;
+    buildTabs();
+    switchGroup(Object.keys(GROUPS).sort()[0]);
+  } catch(e) {
+    document.getElementById("contentArea").innerHTML =
+      `<div class="wc-state">⚠️ 資料載入失敗，請稍後再試。</div>`;
+    document.getElementById("lastUpdated").textContent = "載入失敗";
+  }
 }
+
+init();
 </script>
 </body>
 </html>
