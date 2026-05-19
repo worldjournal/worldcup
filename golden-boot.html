@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026世界盃金靴獎排行</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #C8102E; --dark: #1a1a2e; --mid: #2d2d44; --gold: #D4AF37;
+    --silver: #A8A9AD; --bronze: #CD7F32;
+    --light: #f5f5f0; --border: #e0ddd5; --text: #1a1a1a; --muted: #888;
+  }
+  body { font-family: 'Noto Sans TC', sans-serif; background: #f8f7f3; color: var(--text); padding: 16px; }
+
+  .gb-widget { max-width: 720px; background: #fff; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+
+  .gb-header { background: var(--dark); color: #fff; padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .gb-header-left { display: flex; align-items: center; gap: 10px; }
+  .gb-boot { font-size: 22px; filter: drop-shadow(0 0 6px rgba(212,175,55,.6)); }
+  .gb-title { font-family: 'Noto Serif TC', serif; font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+  .gb-subtitle { font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .06em; margin-top: 2px; }
+  .gb-updated { font-size: 10px; color: rgba(255,255,255,.45); text-align: right; }
+
+  .gb-state { padding: 32px 16px; text-align: center; color: var(--muted); font-size: 13px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .gb-spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .gb-table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: var(--light); font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .08em; text-align: center; padding: 7px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  thead th.col-player { text-align: left; }
+  tbody tr { border-bottom: 1px solid #f0ede8; transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #fdfcf8; }
+  td { padding: 10px 12px; text-align: center; vertical-align: middle; }
+
+  td.col-rank { width: 40px; font-size: 13px; font-weight: 700; }
+  .rank-1 { color: var(--gold); font-size: 18px; }
+  .rank-2 { color: var(--silver); font-size: 16px; }
+  .rank-3 { color: var(--bronze); font-size: 15px; }
+  .rank-other { color: var(--muted); }
+
+  td.col-player { text-align: left; font-weight: 500; font-size: 14px; }
+  .player-name-1 { font-size: 15px; font-weight: 700; }
+
+  td.col-goals { font-size: 20px; font-weight: 700; }
+  .goals-1 { color: var(--gold); font-size: 24px; }
+  .goals-2 { color: var(--silver); font-size: 22px; }
+  .goals-3 { color: var(--bronze); font-size: 20px; }
+  .goals-other { color: var(--text); }
+
+  .gb-footer { padding: 8px 14px; background: var(--light); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .gb-footer span { font-size: 10px; color: var(--muted); }
+  .gb-note { padding: 8px 14px; background: #fffbe8; border-top: 1px solid #f0e8b0; font-size: 11px; color: #7a6a00; }
+</style>
+</head>
+<body>
+<div class="gb-widget">
+  <div class="gb-header">
+    <div class="gb-header-left">
+      <span class="gb-boot">👟</span>
+      <div>
+        <div class="gb-title">2026 FIFA 世界盃 — 金靴獎排行</div>
+        <div class="gb-subtitle">Golden Boot · 進球數排行</div>
+      </div>
+    </div>
+    <div class="gb-updated" id="lastUpdated">載入中…</div>
+  </div>
+
+  <div id="contentArea">
+    <div class="gb-state"><div class="gb-spinner"></div><span>資料載入中…</span></div>
+  </div>
+
+  <div class="gb-note">⚽ 金靴獎以進球數決定，同球數者以助攻數、上場分鐘數依序比較。</div>
+  <div class="gb-footer">
+    <span id="footerNote">數據來源：編輯團隊</span>
+  </div>
+</div>
+
+<script>
+const SHEET_ID = "1k_WZ9R5MS3xxb-SFezMCflNUGkbLKY3Y5BcezQhiJ0c";
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
+
+async function fetchData() {
+  const res = await fetch(SHEET_URL);
+  const text = await res.text();
+  const rows = text.trim().split("\n").slice(1);
+  const players = [];
+  for (const row of rows) {
+    const cols = row.match(/(".*?"|[^,]+)(?=,|$)/g) || [];
+    const clean = cols.map(c => c.replace(/^"|"$/g, "").trim());
+    const [name, goals] = clean;
+    if (!name || name === "球員") continue;
+    players.push({ name, goals: parseInt(goals) || 0 });
+  }
+  return players.sort((a, b) => b.goals - a.goals);
+}
+
+function render(players) {
+  const rows = players.map((p, i) => {
+    const rank = i + 1;
+    const rankClass = rank === 1 ? "rank-1" : rank === 2 ? "rank-2" : rank === 3 ? "rank-3" : "rank-other";
+    const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank;
+    const goalsClass = rank === 1 ? "goals-1" : rank === 2 ? "goals-2" : rank === 3 ? "goals-3" : "goals-other";
+    const playerClass = rank === 1 ? "player-name-1" : "";
+    return `<tr>
+      <td class="col-rank"><span class="${rankClass}">${rankIcon}</span></td>
+      <td class="col-player"><span class="${playerClass}">${p.name}</span></td>
+      <td class="col-goals"><span class="${goalsClass}">${p.goals}</span></td>
+    </tr>`;
+  }).join("");
+
+  document.getElementById("contentArea").innerHTML = `
+    <div class="gb-table-wrap"><table>
+      <thead><tr>
+        <th class="col-rank">#</th>
+        <th class="col-player">球員</th>
+        <th>進球數</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+}
+
+async function init() {
+  try {
+    const players = await fetchData();
+    const now = new Date();
+    document.getElementById("lastUpdated").textContent =
+      `${now.getMonth()+1}月${now.getDate()}日 ${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")} 更新`;
+    render(players);
+  } catch(e) {
+    document.getElementById("contentArea").innerHTML =
+      `<div class="gb-state">⚠️ 資料載入失敗，請稍後再試。</div>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
