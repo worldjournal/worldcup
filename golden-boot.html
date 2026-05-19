@@ -75,7 +75,7 @@
 
   <div class="gb-note">⚽ 金靴獎以進球數決定，同球數者以助攻數、上場分鐘數依序比較。</div>
   <div class="gb-footer">
-    <span id="footerNote">數據來源：編輯團隊</span>
+    <span id="footerNote">更新時間：尚未開賽</span>
   </div>
 </div>
 
@@ -101,10 +101,11 @@ async function fetchData() {
 function render(players) {
   const rows = players.map((p, i) => {
     const rank = i + 1;
-    const rankClass = rank === 1 ? "rank-1" : rank === 2 ? "rank-2" : rank === 3 ? "rank-3" : "rank-other";
-    const rankIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank;
-    const goalsClass = rank === 1 ? "goals-1" : rank === 2 ? "goals-2" : rank === 3 ? "goals-3" : "goals-other";
-    const playerClass = rank === 1 ? "player-name-1" : "";
+    const hasStarted = players.some(p => p.goals > 0);
+    const rankClass = (hasStarted && rank === 1) ? "rank-1" : (hasStarted && rank === 2) ? "rank-2" : (hasStarted && rank === 3) ? "rank-3" : "rank-other";
+    const rankIcon = (hasStarted && rank === 1) ? "🥇" : (hasStarted && rank === 2) ? "🥈" : (hasStarted && rank === 3) ? "🥉" : rank;
+    const goalsClass = (hasStarted && rank === 1) ? "goals-1" : (hasStarted && rank === 2) ? "goals-2" : (hasStarted && rank === 3) ? "goals-3" : "goals-other";
+    const playerClass = (hasStarted && rank === 1) ? "player-name-1" : "";
     return `<tr>
       <td class="col-rank"><span class="${rankClass}">${rankIcon}</span></td>
       <td class="col-player"><span class="${playerClass}">${p.name}</span></td>
@@ -127,8 +128,9 @@ async function init() {
   try {
     const players = await fetchData();
     const now = new Date();
-    document.getElementById("lastUpdated").textContent =
-      `${now.getMonth()+1}月${now.getDate()}日 ${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")} 更新`;
+    const timeStr = `${now.getMonth()+1}月${now.getDate()}日 ${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")} 更新`;
+    document.getElementById("lastUpdated").textContent = timeStr;
+    document.getElementById("footerNote").textContent = timeStr;
     render(players);
   } catch(e) {
     document.getElementById("contentArea").innerHTML =
